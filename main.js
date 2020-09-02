@@ -38,14 +38,8 @@ let money = 0;
 let currentSkin = 2;
 let currentMonster = 1;
 
-const priceSkins = {
-    "one": 20,
-    two: 40,
-    three: 15,
-    four: 10,
-    five: 3,
-    six: 17,
-}
+const priceSkins = [20, 30, 12, 15, 16, 71]
+const ownedSkins = [0]
 
 const floor = canvas.height - 50;
 let shoot = false;
@@ -55,9 +49,6 @@ let play = false;
 let score = 0;
 let numberMonsters = 0
 
-// const skins = {
-//     one: src = `img/skin/1/skinR.png`
-// }
 
 const image = new Image();
 image.src = `img/skin/${currentSkin}/skinR.png`;
@@ -74,36 +65,20 @@ const distance = (x1, x2, y1, y2) => {
     return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2))
 }
 
-
+for (let i = 0; i < ownedSkins.length; i++) {
+    document.querySelectorAll(".shop div")[ownedSkins[i]].style.backgroundColor = "rgb(73, 147, 190)"
+    priceSkins[ownedSkins[i]] = "posiadane"
+}
 
 document.querySelectorAll(".shop div").forEach((skin, index) => {
     const skinToBuy = document.createElement("img");
     const price = document.createElement("font");
     skinToBuy.src = `img/skin/${index+1}/skinR.png`;
-    let number;
-    switch (index + 1) {
-        case 1:
-            number = "one"
-            break;
-        case 2:
-            number = "two"
-            break;
-        case 3:
-            number = "three"
-            break;
-        case 4:
-            number = "four"
-            break;
-        case 5:
-            number = "five"
-            break;
-        case 6:
-            number = "six"
-            break;
+    if (Number.isInteger(priceSkins[index])) {
+        price.textContent = priceSkins[index] + " $"
+    } else {
+        price.textContent = priceSkins[index]
     }
-
-    console.log(number);
-    price.textContent = priceSkins.number + " $"
     skin.appendChild(skinToBuy)
     skin.appendChild(price)
 })
