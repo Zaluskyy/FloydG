@@ -190,6 +190,29 @@ canvas {
     background-color: rgba(65, 190, 138, 0.733);
 }
 
+.shop {
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background-color: rgb(50, 42, 156);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.skin {
+    display: grid;
+    float: left;
+    width: 190px;
+    height: 190px;
+    background-color: rgba(165, 42, 42, 0.418);
+    margin: 3.9px;
+    border: 1px solid black;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
 
 
 
