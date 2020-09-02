@@ -31,6 +31,9 @@ const moneyPlace = document.querySelector(".moneyPlace span");
 
 let money = 0;
 
+let currentSkin = 1;
+let currentMonster = 1;
+
 const floor = canvas.height - 50;
 let shoot = false;
 let canShoot = true;
@@ -40,12 +43,12 @@ let score = 0;
 let numberMonsters = 0
 
 const image = new Image();
-image.src = "img/skin/1/skinR.png";
+image.src = `img/skin/${currentSkin}/skinR.png`;
 
 const monsterImageR = new Image();
-monsterImageR.src = "img/monster/1/monsterR.png"
+monsterImageR.src = `img/monster/${currentMonster}/monsterR.png`
 const monsterImageL = new Image();
-monsterImageL.src = "img/monster/1/monsterL.png"
+monsterImageL.src = `img/monster/${currentMonster}/monsterL.png`
 
 const distance = (x1, x2, y1, y2) => {
     distanceX = x2 - x1;
@@ -210,12 +213,12 @@ class Player {
             //left
             if (controller.left) {
                 square.xVelocity -= 1
-                image.src = "img/skin/1/skinL.png";
+                image.src = `img/skin/${currentSkin}/skinL.png`;
             }
             //right
             if (controller.right) {
                 square.xVelocity += 1
-                image.src = "img/skin/1/skinR.png";
+                image.src = `img/skin/${currentSkin}/skinR.png`;
             }
             //down
             if (controller.down) {
@@ -368,20 +371,20 @@ class Enemy {
             else if (this.monsterXL > canvas.width - monster.width / 2) this.leftL = true
             if (this.leftL) {
                 this.monsterXL -= monster.speed
-                monsterImageL.src = "img/monster/1/monsterR.png"
+                monsterImageL.src = `img/monster/${currentMonster}/monsterR.png`
             } else {
                 this.monsterXL += monster.speed
-                monsterImageL.src = "img/monster/1/monsterL.png"
+                monsterImageL.src = `img/monster/${currentMonster}/monsterL.png`
             }
 
             if (this.monsterXR < 0 + monster.width / 2) this.leftR = false
             else if (this.monsterXR > canvas.width - monster.width / 2) this.leftR = true
             if (this.leftR) {
                 this.monsterXR -= monster.speed
-                monsterImageR.src = "img/monster/1/monsterR.png"
+                monsterImageR.src = `img/monster/${currentMonster}/monsterR.png`
             } else {
                 this.monsterXR += monster.speed
-                monsterImageR.src = "img/monster/1/monsterL.png"
+                monsterImageR.src = `img/monster/${currentMonster}/monsterL.png`
             }
 
             // this.monsterXR--
