@@ -1,0 +1,202 @@
+body {
+    margin: 0;
+    background-color: rgb(46, 46, 46);
+}
+
+.start {
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background-color: rgb(59, 197, 151);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* .start font {
+    font-size: 20px;
+    color: white;
+    margin-left: 130px;
+    line-height: 200px;
+    transform: translateX(-50%)
+} */
+
+.start button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 100px;
+    padding: 8px 10px;
+    outline: none;
+}
+
+.start button:hover {
+    background-color: rgb(14, 212, 146);
+}
+
+.start input {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 75%;
+    outline: none;
+    padding: 5px 10px;
+    text-align: center;
+    width: 250px;
+}
+
+canvas {
+    position: absolute;
+    border: 2px solid black;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: teal;
+    /* cursor: none; */
+}
+
+.lives {
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+/* .lives font {
+    margin-left: 50px;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+} */
+
+.heart {
+    float: left;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    background-image: url(img/elements/heart.png);
+}
+
+.moneyPlace {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    top: 60px;
+    right: 30px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 30px;
+    color: lavender;
+}
+
+.shopBtn {
+    position: absolute;
+    background-color: rgb(28, 201, 172);
+    width: 200px;
+    height: 50px;
+    bottom: 10%;
+    left: 30px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.shopBtn:hover {
+    background-color: rgba(28, 201, 172, 0.685);
+}
+
+.afterDead {
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background-color: rgb(128, 57, 57);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.afterDead font {
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+    margin-left: 90px;
+    line-height: 300px;
+    transform: translateX(-50%)
+}
+
+.afterDead button {
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 40px;
+    padding: 8px 10px;
+    outline: none;
+}
+
+.afterDead button:hover {
+    background-color: rgba(200, 0, 0, 0.664);
+}
+
+.score {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+    color: violet;
+    font-size: 50px;
+    /* width: 100px; */
+    /* height: 100px; */
+    /* background-color: wheat; */
+}
+
+.win {
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background-color: rgb(39, 211, 139);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.win font {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    line-height: 50px;
+    font-size: 17px;
+}
+
+.win button {
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translateX(-50%);
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 40px;
+    padding: 8px 10px;
+    outline: none;
+}
+
+.win button:hover {
+    background-color: rgba(65, 190, 138, 0.733);
+}
+
+
+
+
+
+
+
+
+.hide {
+    display: none;
+}
