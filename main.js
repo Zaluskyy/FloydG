@@ -28,11 +28,24 @@ const shopBtn = document.querySelector(".shopBtn");
 
 const moneyPlace = document.querySelector(".moneyPlace span");
 
+const shop = document.querySelector(".shop");
+
+
+let shopOpened = false
 
 let money = 0;
 
-let currentSkin = 1;
+let currentSkin = 2;
 let currentMonster = 1;
+
+const priceSkins = {
+    "one": 20,
+    two: 40,
+    three: 15,
+    four: 10,
+    five: 3,
+    six: 17,
+}
 
 const floor = canvas.height - 50;
 let shoot = false;
@@ -41,6 +54,10 @@ let shootSpeed = 10;
 let play = false;
 let score = 0;
 let numberMonsters = 0
+
+// const skins = {
+//     one: src = `img/skin/1/skinR.png`
+// }
 
 const image = new Image();
 image.src = `img/skin/${currentSkin}/skinR.png`;
@@ -57,6 +74,50 @@ const distance = (x1, x2, y1, y2) => {
     return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2))
 }
 
+
+
+document.querySelectorAll(".shop div").forEach((skin, index) => {
+    const skinToBuy = document.createElement("img");
+    const price = document.createElement("font");
+    skinToBuy.src = `img/skin/${index+1}/skinR.png`;
+    let number;
+    switch (index + 1) {
+        case 1:
+            number = "one"
+            break;
+        case 2:
+            number = "two"
+            break;
+        case 3:
+            number = "three"
+            break;
+        case 4:
+            number = "four"
+            break;
+        case 5:
+            number = "five"
+            break;
+        case 6:
+            number = "six"
+            break;
+    }
+
+    console.log(number);
+    price.textContent = priceSkins.number + " $"
+    skin.appendChild(skinToBuy)
+    skin.appendChild(price)
+})
+
+const openShop = () => {
+    if (!shopOpened) {
+        shop.classList.remove("hide")
+        shopOpened = true
+    } else {
+        shop.classList.add("hide")
+        shopOpened = false
+    }
+}
+
 const addMoney = () => {
     moneyPlace.textContent = money;
 }
@@ -64,7 +125,6 @@ const addMoney = () => {
 const getMoney = () => {
     const random = Math.floor(Math.random() * 10);
     if (random == 0) {
-        console.log(random);
         money++
         addMoney()
     }
@@ -327,13 +387,13 @@ class Enemy {
                 } else {
                     this.monsterXR = undefined
                     this.monsterYR = undefined
+                    getMoney()
                     score++
                     scorePlace.textContent = score
                     if (score == enemy.length * 2) {
                         win()
                     }
                 }
-                getMoney()
             }
             const diedMonsterL = () => {
                 if (this.monsterYL < canvas.height) {
@@ -342,13 +402,13 @@ class Enemy {
                 } else {
                     this.monsterXL = undefined
                     this.monsterYL = undefined
+                    getMoney()
                     score++
                     scorePlace.textContent = score
                     if (score == enemy.length * 2) {
                         win()
                     }
                 }
-                getMoney()
             }
 
             //collision detection with bullet
@@ -451,6 +511,8 @@ const startGame = () => {
 }
 
 const again = () => {
+    shopOpened = true
+    openShop()
     shopBtn.classList.add("hide")
     theEnd.classList.add("hide")
     winPage.classList.add("hide")
@@ -464,6 +526,7 @@ const again = () => {
     bulletRestart()
 }
 
+shopBtn.addEventListener("click", openShop)
 document.addEventListener("keydown", controller.keyListener)
 document.addEventListener("keyup", controller.keyListener)
 startBtn.addEventListener("click", startGame)
