@@ -30,16 +30,18 @@ const moneyPlace = document.querySelector(".moneyPlace span");
 
 const shop = document.querySelector(".shop");
 
+const skins = document.querySelectorAll(".shop div");
+
 
 let shopOpened = false
 
 let money = 0;
 
-let currentSkin = 2;
+let currentSkin = 1;
 let currentMonster = 1;
 
-const priceSkins = [20, 30, 12, 15, 16, 71]
-const ownedSkins = [0]
+const priceSkins = [0, 2, 5, 10, 15, 20]
+const ownedSkins = [1]
 
 const floor = canvas.height - 50;
 let shoot = false;
@@ -65,12 +67,9 @@ const distance = (x1, x2, y1, y2) => {
     return Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2))
 }
 
-for (let i = 0; i < ownedSkins.length; i++) {
-    document.querySelectorAll(".shop div")[ownedSkins[i]].style.backgroundColor = "rgb(73, 147, 190)"
-    priceSkins[ownedSkins[i]] = "posiadane"
-}
+skins[currentSkin - 1].style.border = "1px solid gold"
 
-document.querySelectorAll(".shop div").forEach((skin, index) => {
+skins.forEach((skin, index) => {
     const skinToBuy = document.createElement("img");
     const price = document.createElement("font");
     skinToBuy.src = `img/skin/${index+1}/skinR.png`;
@@ -82,6 +81,36 @@ document.querySelectorAll(".shop div").forEach((skin, index) => {
     skin.appendChild(skinToBuy)
     skin.appendChild(price)
 })
+
+const toOwned = () => {
+    for (let i = 0; i < ownedSkins.length; i++) {
+        skins[ownedSkins[i] - 1].style.backgroundColor = "rgb(73, 147, 190)"
+        priceSkins[ownedSkins[i] - 1] = "posiadane"
+        document.querySelectorAll(".shop div font")[0].textContent = priceSkins[0]
+    }
+}
+toOwned()
+
+//buying
+skins.forEach((skin, index) => skin.addEventListener("click", () => {
+    if (priceSkins[index] <= money && ownedSkins.includes(index + 1) == false) {
+        money -= priceSkins[index]
+        moneyPlace.textContent = money
+        ownedSkins.push(index + 1)
+        toOwned()
+        document.querySelectorAll(".shop div font")[index].textContent = priceSkins[index]
+        console.log(priceSkins[index], money);
+    } else if (ownedSkins.includes(index + 1)) {
+        currentSkin = index + 1
+        skins.forEach(skin => {
+            skin.style.border = "1px solid black"
+        })
+        skins[currentSkin - 1].style.border = "1px solid gold"
+    }
+    console.log(index);
+}))
+
+
 
 const openShop = () => {
     if (!shopOpened) {
@@ -337,8 +366,6 @@ class Player {
             //player
             ctx.fillStyle = "red";
             ctx.drawImage(image, square.x - square.width / 2, square.y, square.width, square.size)
-            // ctx.fillRect(square.x, square.y, square.width, square.size)
-
 
         }
     }
@@ -422,21 +449,16 @@ class Enemy {
                 monsterImageR.src = `img/monster/${currentMonster}/monsterL.png`
             }
 
-            // this.monsterXR--
-            // this.monsterXL++
-
             this.draw()
         }
         this.draw = () => {
             //right
             ctx.beginPath()
-            // ctx.rect(this.monsterXR - monster.width / 2, this.monsterYR, monster.width, monster.height)
             ctx.drawImage(monsterImageR, this.monsterXR - monster.width / 2, this.monsterYR, monster.width, monster.height)
             ctx.fill()
             ctx.closePath()
             //left
             ctx.beginPath()
-            // ctx.rect(this.monsterXL - monster.width / 2, this.monsterYL, monster.width, monster.height)
             ctx.drawImage(monsterImageL, this.monsterXL - monster.width / 2, this.monsterYL, monster.width, monster.height)
             ctx.fill()
             ctx.closePath()
