@@ -22,7 +22,7 @@
 
     <div class="start">
         <button>START</button>
-        <input type="number" placeholder="Ilośc przeciwników (liczba parzysta)">
+        <input type="number" placeholder="Ilośc przeciwników (liczba parzysta)" min="0">
     </div>
 
     <div class="win hide">
@@ -32,13 +32,18 @@
                         uduszeniem
             </h2>
         </font>
-        <button>Zagraj jeszcze raz </button>
+        <button class="again">Zagraj jeszcze raz </button>
+        <!--  -->
+        <!--  -->
     </div>
-
+    
     <div class="afterDead hide">
         <font>Policjanci cię udusili</font><br>
         <button>Spróbuj jeszcze raz </button>
     </div>
+
+    <input type="number" class="changeAquantity" placeholder="Nowa ilość przeciwników" min="0">
+    <button class="changeAquantity">Zmień ilośc przeciwników</button>
 
     <div class="shop hide">
         <div class="skin1 skin"></div>
