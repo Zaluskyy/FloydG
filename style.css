@@ -55,7 +55,8 @@ canvas {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: teal;
+    background: linear-gradient(to bottom, rgb(190, 200, 132), teal, teal, teal);
+    /* background-color: teal; */
     /* cursor: none; */
 }
 
@@ -173,7 +174,7 @@ canvas {
     font-size: 17px;
 }
 
-.win button {
+.win button.again {
     position: absolute;
     left: 50%;
     top: 65%;
@@ -188,6 +189,39 @@ canvas {
 
 .win button:hover {
     background-color: rgba(65, 190, 138, 0.733);
+}
+
+input.changeAquantity {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    /* background-color: rgb(187, 216, 178); */
+    background: linear-gradient(to left, rgb(143, 129, 129), rgb(255, 255, 255));
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 2px 2.5px;
+    outline: none;
+    text-align: center;
+}
+
+button.changeAquantity {
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 2px 2.5px;
+    outline: none;
+}
+
+.afterDead input.changeAquantity{
+    background-color: rgb(87, 33, 33);
 }
 
 .shop {
