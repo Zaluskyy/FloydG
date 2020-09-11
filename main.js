@@ -10,8 +10,6 @@ let lives = hearts.length;
 
 const afterDead = document.querySelector(".afterDead");
 
-const theEnd = document.querySelector(".afterDead");
-
 const tryAgain = document.querySelector(".afterDead button");
 
 const scorePlacee = document.querySelector(".score")
@@ -19,6 +17,8 @@ const scorePlace = document.querySelector(".score span")
 
 const winPage = document.querySelector(".win");
 const winBtn = document.querySelector(".win button");
+
+const newQuantity = document.querySelector(".changeQuantity");
 
 
 const canvas = document.querySelector("canvas");
@@ -31,6 +31,10 @@ const moneyPlace = document.querySelector(".moneyPlace span");
 const shop = document.querySelector(".shop");
 
 const skins = document.querySelectorAll(".shop div");
+
+const inputChangeAquantity = document.querySelector("input.changeAquantity")
+
+const btnChangeAquantity = document.querySelector("button.changeAquantity")
 
 
 let shopOpened = false
@@ -55,10 +59,11 @@ let numberMonsters = 0
 const image = new Image();
 image.src = `img/skin/${currentSkin}/skinR.png`;
 
+
 const monsterImageR = new Image();
-monsterImageR.src = `img/monster/${currentMonster}/monsterR.png`
+// monsterImageR.src = `img/monster/${currentMonster}/monsterL.png`
 const monsterImageL = new Image();
-monsterImageL.src = `img/monster/${currentMonster}/monsterL.png`
+// monsterImageL.src = `img/monster/${currentMonster}/monsterR.png`
 
 const distance = (x1, x2, y1, y2) => {
     distanceX = x2 - x1;
@@ -110,7 +115,29 @@ skins.forEach((skin, index) => skin.addEventListener("click", () => {
     console.log(index);
 }))
 
+const changeAquantityAppear = () => {
+    if (winPage.classList.contains("hide") && afterDead.classList.contains("hide")) {
+        inputChangeAquantity.classList.add("hide")
+        btnChangeAquantity.classList.add("hide")
+    } else if (!winPage.classList.contains("hide") || !afterDead.classList.contains("hide")) {
+        inputChangeAquantity.classList.remove("hide")
+        btnChangeAquantity.classList.remove("hide")
+    }
+}
+changeAquantityAppear()
 
+const changeAquantity = () => {
+    if (inputChangeAquantity.value == "") {
+        return
+    } else if ((inputChangeAquantity.value * 1) % 2 == 0) {
+        numberMonsters = (inputChangeAquantity.value * 1) / 2
+    } else if ((inputChangeAquantity.value * 1) % 2 != 0) {
+        numberMonsters = (inputChangeAquantity.value * 1 + 1) / 2
+    }
+    inputChangeAquantity.textContent = "";
+    again();
+    inputChangeAquantity.value = "";
+}
 
 const openShop = () => {
     if (!shopOpened) {
@@ -161,6 +188,7 @@ const enterClick = () => {
 const win = () => {
     winPage.classList.remove("hide")
     gameRestart()
+    changeAquantityAppear()
 }
 
 
@@ -253,6 +281,7 @@ class Player {
             this.dead = () => {
                 afterDead.classList.remove("hide")
                 gameRestart()
+                changeAquantityAppear()
             }
 
 
@@ -433,20 +462,20 @@ class Enemy {
             else if (this.monsterXL > canvas.width - monster.width / 2) this.leftL = true
             if (this.leftL) {
                 this.monsterXL -= monster.speed
-                monsterImageL.src = `img/monster/${currentMonster}/monsterR.png`
+                monsterImageL.src = `img/monster/${currentMonster}/monsterL.png`
             } else {
                 this.monsterXL += monster.speed
-                monsterImageL.src = `img/monster/${currentMonster}/monsterL.png`
+                monsterImageL.src = `img/monster/${currentMonster}/monsterR.png`
             }
 
             if (this.monsterXR < 0 + monster.width / 2) this.leftR = false
             else if (this.monsterXR > canvas.width - monster.width / 2) this.leftR = true
             if (this.leftR) {
                 this.monsterXR -= monster.speed
-                monsterImageR.src = `img/monster/${currentMonster}/monsterR.png`
+                monsterImageR.src = `img/monster/${currentMonster}/monsterL.png`
             } else {
                 this.monsterXR += monster.speed
-                monsterImageR.src = `img/monster/${currentMonster}/monsterL.png`
+                monsterImageR.src = `img/monster/${currentMonster}/monsterR.png`
             }
 
             this.draw()
@@ -479,6 +508,7 @@ const getEnemy = () => {
 }
 
 const game = () => {
+    changeAquantityAppear()
     if (play) {
         requestAnimationFrame(game)
     } else {
@@ -508,10 +538,11 @@ const startGame = () => {
 }
 
 const again = () => {
+    inputChangeAquantity.value = "";
     shopOpened = true
     openShop()
     shopBtn.classList.add("hide")
-    theEnd.classList.add("hide")
+    afterDead.classList.add("hide")
     winPage.classList.add("hide")
     play = true
     getEnemy()
@@ -521,8 +552,11 @@ const again = () => {
     square.x = canvas.width / 2
     scorePlace.textContent = score
     bulletRestart()
+    if (controller.move == "right") image.src = `img/skin/${currentSkin}/skinR.png`;
+    else image.src = `img/skin/${currentSkin}/skinL.png`;
 }
 
+btnChangeAquantity.addEventListener("click", changeAquantity)
 shopBtn.addEventListener("click", openShop)
 document.addEventListener("keydown", controller.keyListener)
 document.addEventListener("keyup", controller.keyListener)
